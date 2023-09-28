@@ -12,7 +12,11 @@ processed_invoices_folder = "processed_invoices/"
 def process_pdf(input_pdf):
     doc = fitz.open(input_pdf)
 
-    page = doc[0] 
+
+    page = doc[0]
+    extracted_text =  page.get_text()
+    word_list = extracted_text.split()
+
 
     file_name = os.path.basename(input_pdf)
     output_filename =  "processed_" + file_name
@@ -27,13 +31,23 @@ def process_pdf(input_pdf):
 
     total_amount_with_margin_text = process_answer(answer, total_amount_with_margin )
 
+    # Calculez le partial_ratio le plus élevé et le mot équivalent
+    highest_ratio, best_match = calculate_partial_ratio(word_list, answer)
+
+    
     print("The total amount detected is : " , answer)
+    print(f"the best match word : {best_match}")
+    print(f"the highest ratio : {highest_ratio}")
+
     print("The total amount converted is : " , total_mount)
     print("The total amount with margin is : " , total_amount_with_margin_text)
 
     # list of rectangles where to replace
 
-    hits = page.search_for(answer)  
+ 
+
+    hits = page.search_for(best_match)  
+
     for rect in hits:
         point = (rect[0], rect[-1])
 

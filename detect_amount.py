@@ -2,7 +2,7 @@ import fitz
 import os
 import re
 from transformers import pipeline
-from PIL import Image
+from rapidfuzz import fuzz
 
 pipe = pipeline("document-question-answering", model="naver-clova-ix/donut-base-finetuned-docvqa")
 image_data_folder = "invoices-images/"
@@ -98,3 +98,17 @@ def process_answer(answer, total_amount_with_margin):
         total_amount_with_margin_text = str(total_amount_with_margin)
 
     return total_amount_with_margin_text
+
+
+# Fonction pour calculer le partial_ratio entre un mot fixe et une liste de mots
+def calculate_partial_ratio(word_list, fixed_word):
+    highest_ratio = 0
+    best_match = ""
+
+    for word in word_list:
+        ratio = fuzz.partial_ratio(fixed_word, word)
+        if ratio > highest_ratio:
+            highest_ratio = ratio
+            best_match = word
+
+    return highest_ratio, best_match
