@@ -100,8 +100,8 @@ def process_answer(answer, total_amount_with_margin):
     return total_amount_with_margin_text
 
 
-# Fonction pour calculer le partial_ratio entre un mot fixe et une liste de mots
-def calculate_partial_ratio(word_list, fixed_word):
+# Fonction pour calculer le ratio entre un mot fixe et une liste de mots
+def calculate_ratio(word_list, fixed_word):
     highest_ratio = 0
     best_match = ""
 
