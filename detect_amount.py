@@ -106,7 +106,7 @@ def calculate_partial_ratio(word_list, fixed_word):
     best_match = ""
 
     for word in word_list:
-        ratio = fuzz.partial_ratio(fixed_word, word)
+        ratio = fuzz.ratio(fixed_word, word)
         if ratio > highest_ratio:
             highest_ratio = ratio
             best_match = word

@@ -34,7 +34,8 @@ def process_pdf(input_pdf):
     # Calculez le partial_ratio le plus élevé et le mot équivalent
     highest_ratio, best_match = calculate_partial_ratio(word_list, answer)
 
-    
+    answer = answer if answer in word_list else best_match
+
     print("The total amount detected is : " , answer)
     print(f"the best match word : {best_match}")
     print(f"the highest ratio : {highest_ratio}")
@@ -46,7 +47,7 @@ def process_pdf(input_pdf):
 
  
 
-    hits = page.search_for(best_match)  
+    hits = page.search_for(answer)  
 
     for rect in hits:
         point = (rect[0], rect[-1])
