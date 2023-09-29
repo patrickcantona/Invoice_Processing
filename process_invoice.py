@@ -32,7 +32,7 @@ def process_pdf(input_pdf):
     total_amount_with_margin_text = process_answer(answer, total_amount_with_margin )
 
     # Calculez le partial_ratio le plus élevé et le mot équivalent
-    highest_ratio, best_match = calculate_partial_ratio(word_list, answer)
+    highest_ratio, best_match = calculate_ratio(word_list, answer)
 
     answer = answer if answer in word_list else best_match
 
