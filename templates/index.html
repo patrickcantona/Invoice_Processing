@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Processor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            border: 2px solid #3498db;
+            padding: 5px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <h1>Invoice Processor</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="pdf_file">Sélectionnez un fichier PDF :</label>
+        <input type="file" name="pdf_file" id="pdf_file" accept=".pdf" required>
+        <br>
+        <input type="submit" value="Traiter la facture">
+    </form>
+
+    {% if generated_pdf %}
+    <h2>Résultats :</h2>
+    <p>Montant du PDF d'origine : {{ original_amount }}</p>
+    <p>Nouveau montant avec marge : {{ new_amount }}</p>
+    <a href="{{ generated_pdf }}" download>Télécharger le PDF généré</a>
+    {% endif %}
+</body>
+</html>
