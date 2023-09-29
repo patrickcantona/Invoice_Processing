@@ -22,14 +22,14 @@ def upload_file():
             return "Invalid file type"
 
         # Enregistrez le fichier téléchargé temporairement
-        uploaded_pdf_path = "uploaded.pdf"
+        uploaded_pdf_path = os.path.join("invoices/" ,pdf_file.filename )
         pdf_file.save(uploaded_pdf_path)
 
         # Traitez le fichier PDF
         process_pdf(uploaded_pdf_path)
 
         # Renvoyez le fichier généré en téléchargement
-        generated_pdf_path = "processed_invoices/processed_" + os.path.basename(uploaded_pdf_path)
+        generated_pdf_path = "processed_invoices/processed_" + os.path.basename(pdf_file.filename)
         return send_file(generated_pdf_path, as_attachment=True)
 
     return render_template("index.html")
